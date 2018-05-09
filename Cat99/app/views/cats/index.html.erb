@@ -1,0 +1,7 @@
+<h1>ALL deez Cats</h1>
+
+<% @cats.each do |cat|  %>
+<ul>
+  <li> <%=render 'cat_template', cat: cat, action: :index %> </li>
+</ul>
+<% end  %>

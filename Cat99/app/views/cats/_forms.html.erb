@@ -1,0 +1,63 @@
+<% if action == :edit %>
+  <% final_url = cat_url(cat) %>
+  <% final_str = 'Edit Cat' %>
+<% else %>
+  <% final_url = cats_url %>
+  <% final_str = 'Create New Cat' %>
+<% end %>
+
+
+
+
+<form action="<%= final_url %>" method="post">
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="patch">
+  <% end %>
+  
+  <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+  
+  <br>
+  
+  <label for="birth_date">Birth Date</label>
+  <input id="birth_date" type="date" name="cat[birth_date]" value= <%= cat.birth_date %>>
+  
+  <br>
+  
+  <label for="color">-- Select a Color --</label>
+  <select id= 'color' name="cat[color]">
+    <% if action == :new %>
+      <option disabled selected>option</option>
+    <% end %>
+    
+    <option <%= cat.color == 'Black' ? 'selected' : '' %> value="Black">Black</option>
+    <option <%= cat.color == 'Orange' ? 'selected' : '' %> value="Orange">Orange</option>
+    <option <%= cat.color == 'Grey' ? 'selected' : '' %> value="Grey">Grey</option>
+    <option <%= cat.color == 'White' ? 'selected' : '' %> value="White">White</option>
+    <option <%= cat.color == 'Yellow' ? 'selected' : '' %> value="Yellow">Yellow</option>
+    <option <%= cat.color == 'Brown' ? 'selected' : '' %> value="Brown">Brown</option>
+  </select>
+  
+  <br>
+  <div>
+    <label >Sex</label>
+    <input id= 'sex' type="radio" name="cat[sex]" value= 'M' <%= cat.sex == "M" ? 'checked' : '' %>>
+    <label for="sex">Male</label>
+    <input id= 'sex' type="radio" name="cat[sex]" value= 'F' <%= cat.sex == "F" ? 'checked' : '' %>>
+    <label for="sex">Female</label>
+  </div>
+  <!-- <select id= 'sex' name="cat[sex]">
+    <option disabled selected>option</option>
+    <option value="M">M</option>
+    <option value="F">F</option>
+  </select> -->
+  
+  <br>
+  <br>
+  
+  <label for="description">Description</label>
+  <textarea id="description" name="cat[description]"></textarea>
+  <br>
+  <br>
+  <input type="submit" value= <%= final_str %>>
+</form>
